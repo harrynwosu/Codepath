@@ -29,7 +29,7 @@ Here's a walkthrough of implemented required features: https://i.imgur.com/jjcCM
 <img src="https://i.imgur.com/jjcCMo4.gif" title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 <!-- Replace this with whatever GIF tool you used! -->
-GIF created with ...  
+GIF created with ScreenToGif
 <!-- Recommended tools:
 [Kap](https://getkap.co/) for macOS
 [ScreenToGif](https://www.screentogif.com/) for Windows
