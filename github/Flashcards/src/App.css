@@ -29,6 +29,12 @@ button {
   transition: border-color .25s;
 }
 
+img{
+  height:200px;
+  width: 250px;
+
+}
+
 .card {
   display: flex;
   justify-content: center;
