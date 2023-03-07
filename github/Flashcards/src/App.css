@@ -1,0 +1,52 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+#easy{
+  background-color: lightgreen;
+}
+
+#medium {
+  background-color: #e6e26fd9;
+}
+
+#hard{
+  background-color: lightcoral;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color .25s;
+}
+
+.card {
+  display: flex;
+  justify-content: center;
+  padding: 2em;
+  align-items: center;
+  border-radius: 2px;
+  box-shadow: 0 0 5px 2px #0000004d;
+  transform-style: preserve-3d;
+  font-weight: 700;
+  height: 250px;
+  cursor: pointer;
+  transition: .15s;
+  transform: perspective(1000px) rotateX(var(--rotate-X, 0));
+}
+
+.card .front, .card .back{
+  position: absolute;
+  padding: 5px;
+  justify-content: center;
+  backface-visibility: hidden;
+}
