@@ -41,6 +41,7 @@ function App() {
       setCurrent(0)
       setResult("wrong")
     }
+    setText("")
   }
   const handleChange = (e) =>{
     const newText = e.target.value
