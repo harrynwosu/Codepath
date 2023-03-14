@@ -56,3 +56,21 @@ img{
   justify-content: center;
   backface-visibility: hidden;
 }
+
+.guessing {
+  font-weight: bolder;
+  background-color: #f8ebdb80
+}
+.wrong {
+  border: 3px solid red
+}
+
+.correct {
+  border: 3px solid rgb(17,0,255)
+}
+
+.submit-button {
+    width: 100px;
+    height: 35px;
+    font-size: 11px;
+}

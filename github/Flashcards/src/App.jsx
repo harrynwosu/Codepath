@@ -3,30 +3,82 @@ import reactLogo from './assets/react.svg'
 import React from 'react'
 import './App.css'
 
+var idx =  0
 function App() {
-  var idx = 0
+  const [current,setCurrent] = useState(0)
+  const [longest, setLongest] = useState(0)
   const [card, setCard] = useState(card0)
-  const cards = [card1, card2, card3, card4, card5, card6, card7, card8, card9, card10, card11, card12, card13, card14, card15]
-  const updateCard = () => {
-    var random = Math.floor(Math.random() * cards.length)
-    while (cards[random] == card){
-      random = Math.floor(Math.random() * cards.length)
-    }
-    setCard(cards[random])
+  const [text, setText] = useState("")
+  const [result, setResult] = useState("")
+  const [cards, setCards] = useState([card0, card1, card2, card3, card4, card5, card6, card7, card8, card9, card10, card11, card12, card13, card14, card15])
+  
+  const previousCard = () => {
+    idx -= 1
+    setCard(cards[idx])
   }
+
+  const nextCard = () => {
+    idx += 1
+    setCard(cards[idx])
+    // if (idx<cards.length){
+    //   setCard(cards[idx])
+    //   idx += 1
+    // }else{
+    //   setCard(card0)
+    //   idx = 0
+    // }
+  }
+  const checkAnswer = () =>{
+    const lower = document.getElementsByName("answer")
+    const correct = card.capital
+    if (correct.includes(lower[0].value) && lower[0].value != ""){
+      setCurrent(current+1)
+      setResult("correct")
+    }else{
+      if(current>longest){
+        setLongest(current)
+      }
+      setCurrent(0)
+      setResult("wrong")
+    }
+  }
+  const handleChange = (e) =>{
+    const newText = e.target.value
+    setText(newText)
+  }
+
+  const shuffleCards = () =>{
+    const newCards = cards.sort(() => Math.random() - 0.5)
+    setCards(newCards)
+  }
+
   return (
     <div>
       <div>
         <h2>Know Your Cities</h2>
         <h4>How well do you know the capital cities of the world? Test your geographical knowledge here!</h4>
         <h5>Number of cards: 15</h5>
+        <div>
+          <h4>Current streak: {current}  Longest streak: {longest}</h4>
+        </div>
         <br></br>
       </div>
 
       <div>
-        <Card card={card}q/>
+        <Card card={card}/>
       </div>
-      <button type="next" className="nextCard" onClick={updateCard}>⭢</button>
+
+      <div className='guessing'>
+        Guess the answer here: 
+        <input type="text" name="answer" placeholder="Place your answer here..." className={result} onChange={handleChange}/>
+        <button type="submit" className="submit-button" onClick={checkAnswer}>Submit Guess</button>
+      </div>
+
+      <div>
+      <button type="back" className="previousCard" onClick={previousCard} disabled={idx === 0}>⭠</button>
+      <button type="next" className="nextCard" onClick={nextCard} disabled={idx === cards.length - 1}>⭢</button>
+      <button type="shuffle" className="shuffle-button" onClick={shuffleCards}>Shuffle Cards</button>
+      </div>
     </div>
   )
 }
@@ -34,7 +86,7 @@ function App() {
 const Card = ({card}) =>{
   const [state, setState] = useState("front")
   const updateState = () => {
-    if (state=="front"){
+    if (state === "front"){
       setState("back")
     }else{
       setState("front")
@@ -43,10 +95,10 @@ const Card = ({card}) =>{
 
     return(
       <React.Fragment>
-        <div className='card' id ={card.difficulty}>
-          {state == "front"
-            ? <Front cardface={card} onClick={updateState}/>
-            : <Back cardface={card} onClick={updateState}/>
+        <div className='card' id ={card.difficulty} onClick={updateState}>
+          {state === "front"
+            ? <Front cardface={card} />
+            : <Back cardface={card} />
           }
         </div>
       </React.Fragment>
@@ -58,7 +110,7 @@ class Front extends React.Component{
   render(){
     return(
       <React.Fragment>
-        <div className = "front">
+        <div className = "front" onClick={this.props.onClick}>
             <h4>{this.props.cardface.country}</h4>
             <img src={this.props.cardface.img} alt={this.props.cardface.country}/>
             <br></br>
@@ -72,7 +124,7 @@ class Back extends React.Component{
   render(){
     return(
       <React.Fragment>
-        <div className = "back">
+        <div className = "back" onClick={this.props.onClick}>
             <h4>{this.props.cardface.capital}</h4>
             <br></br>
         </div>
